@@ -1,11 +1,17 @@
 import compression from "compression"
-import express, { Express, Request, Response, NextFunction, ErrorRequestHandler } from "express"
+import express, {
+  Express,
+  Request,
+  Response,
+  NextFunction,
+  ErrorRequestHandler,
+} from "express"
 import helmet from "helmet"
 import morgan from "morgan"
 // require("dotenv").config()
-import routes from "./routes";
+import routes from "./routes"
 
-import {NotFoundError} from "./core/error.response"
+import { NotFoundError } from "./core/error.response"
 
 const app: Express = express()
 
@@ -14,9 +20,11 @@ app.use(morgan("dev"))
 app.use(helmet())
 app.use(compression())
 app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}))
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+)
 
 // DB
 // require("./dbs/init.mongodb")

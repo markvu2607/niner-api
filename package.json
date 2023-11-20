@@ -8,13 +8,24 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "bun --watch server.ts"
+    "dev": "bun --watch server.ts",
+    "lint": "eslint --ext .ts,.js src/",
+    "format": "prettier --write --ignore-path=.gitignore .",
+    "format:check": "prettier --check --ignore-path=.gitignore .",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
     "@types/morgan": "^1.9.9",
+    "@typescript-eslint/parser": "^6.11.0",
     "bun-types": "latest",
-    "morgan": "^1.10.0"
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "morgan": "^1.10.0",
+    "prettier": "^3.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -25,5 +36,8 @@
     "helmet": "^7.1.0",
     "http-status-codes": "^2.3.0",
     "lodash": "^4.17.21"
+  },
+  "lint-staged": {
+    "*.{ts,js}": "eslint --cache --fix"
   }
 }

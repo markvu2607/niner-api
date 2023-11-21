@@ -8,7 +8,9 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "bun ./out/server.js",
     "dev": "bun --watch server.ts",
+    "build": "bun build --target=bun ./server.ts --outdir ./out",
     "lint": "eslint --ext .ts,.js src/",
     "format": "prettier --write --ignore-path=.gitignore .",
     "format:check": "prettier --check --ignore-path=.gitignore .",

@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "bun --watch server.ts",
+    "build": "rollup -c --bundleConfigAsCjs",
     "lint": "eslint --ext .ts,.js src/",
     "format": "prettier --write --ignore-path=.gitignore .",
     "format:check": "prettier --check --ignore-path=.gitignore .",
@@ -25,7 +26,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "morgan": "^1.10.0",
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "rollup": "^4.5.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

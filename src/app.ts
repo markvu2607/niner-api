@@ -7,24 +7,29 @@ import express, {
   ErrorRequestHandler,
 } from "express"
 import helmet from "helmet"
-import morgan from "morgan"
-// require("dotenv").config()
-import routes from "./routes"
+import morgan from "./configs/morgan"
+import cors from "cors"
 
+import routes from "./routes"
 import { NotFoundError } from "./core/error.response"
+import config from "./configs/config"
 
 const app: Express = express()
 
-// Middlewares
-app.use(morgan("dev"))
+if (config.environment !== "test") {
+  app.use(morgan.successHandler)
+  app.use(morgan.errorHandler)
+}
 app.use(helmet())
-app.use(compression())
 app.use(express.json())
+app.use(compression())
 app.use(
   express.urlencoded({
     extended: true,
   }),
 )
+app.use(cors())
+app.options("*", cors())
 
 // DB
 // require("./dbs/init.mongodb")

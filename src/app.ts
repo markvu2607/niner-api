@@ -13,6 +13,7 @@ import cors from "cors"
 import routes from "./routes"
 import { NotFoundError } from "./core/error.response"
 import config from "./configs/config"
+import { errorConverter, errorHandler } from "./middlewares/error"
 
 const app: Express = express()
 
@@ -39,19 +40,12 @@ app.use("", routes)
 
 // Handling not found
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const error = new NotFoundError("Not found route")
+  const error = new NotFoundError()
   next(error)
 })
 
-// Handling error
-app.use(((error, req: Request, res: Response, next: NextFunction) => {
-  const status = error.status || 500
+app.use(errorConverter as unknown as ErrorRequestHandler)
 
-  return res.status(status).json({
-    status,
-    message: error.message || "Internal Server Error",
-    // stack: error.stack,
-  })
-}) as ErrorRequestHandler)
+app.use(errorHandler as unknown as ErrorRequestHandler)
 
 export default app

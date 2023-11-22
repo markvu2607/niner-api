@@ -1,60 +1,73 @@
 import { StatusCodes, ReasonPhrases } from "http-status-codes"
 
 class ErrorResponse extends Error {
-  private status: number
+  statusCode: number
+  isOperational: boolean
 
-  constructor(message: string, status: number) {
+  constructor(
+    statusCode: number,
+    message: string,
+    isOperational = true,
+    stack = "",
+  ) {
     super(message)
-    this.status = status
+    this.statusCode = statusCode
+    this.isOperational = isOperational
+    if (stack) {
+      this.stack = stack
+    } else {
+      Error.captureStackTrace(this, this.constructor)
+    }
   }
 }
 
 class ConflictError extends ErrorResponse {
   constructor(
+    statusCode: number = StatusCodes.CONFLICT,
     message: string = ReasonPhrases.CONFLICT,
-    status: number = StatusCodes.CONFLICT,
   ) {
-    super(message, status)
+    super(statusCode, message)
   }
 }
 
 class BadRequestError extends ErrorResponse {
   constructor(
+    statusCode: number = StatusCodes.BAD_REQUEST,
     message: string = ReasonPhrases.BAD_REQUEST,
-    status: number = StatusCodes.BAD_REQUEST,
   ) {
-    super(message, status)
+    super(statusCode, message)
   }
 }
 
 class ForbiddenError extends ErrorResponse {
   constructor(
+    statusCode: number = StatusCodes.FORBIDDEN,
     message: string = ReasonPhrases.FORBIDDEN,
-    status: number = StatusCodes.FORBIDDEN,
   ) {
-    super(message, status)
+    super(statusCode, message)
   }
 }
 
 class UnauthorizedError extends ErrorResponse {
   constructor(
+    statusCode: number = StatusCodes.UNAUTHORIZED,
     message: string = ReasonPhrases.UNAUTHORIZED,
-    status: number = StatusCodes.UNAUTHORIZED,
   ) {
-    super(message, status)
+    super(statusCode, message)
   }
 }
 
 class NotFoundError extends ErrorResponse {
   constructor(
+    statusCode: number = StatusCodes.NOT_FOUND,
     message: string = ReasonPhrases.NOT_FOUND,
-    status: number = StatusCodes.NOT_FOUND,
   ) {
-    super(message, status)
+    super(statusCode, message)
   }
 }
 
 export {
+  ErrorResponse,
   ConflictError,
   BadRequestError,
   ForbiddenError,

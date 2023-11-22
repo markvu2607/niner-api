@@ -1,9 +1,9 @@
 import morgan from "morgan"
 import config from "./config"
 import logger from "./logger"
+import { Response } from "express"
 
-// morgan.token("message", (req, res) => res.locals.errorMessage || "")
-morgan.token("message", (req, res) => res.errored?.message || "")
+morgan.token("message", (req, res: Response) => res.locals.errorMessage || "")
 
 const getIpFormat = () =>
   config.environment === "production" ? ":remote-addr - " : ""

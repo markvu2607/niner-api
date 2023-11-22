@@ -3,47 +3,47 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes"
 
 type TSuccessResponse = {
   message: string
-  status?: number
+  statusCode?: number
   reasonPhrases?: string
   metadata?: any
 }
 
 class SuccessResponse {
-  private message: string
-  private status: number
-  private metadata: any
+  message: string
+  statusCode: number
+  metadata: any
 
   constructor({
     message,
-    status = StatusCodes.OK,
+    statusCode = StatusCodes.OK,
     reasonPhrases = ReasonPhrases.OK,
     metadata = {},
   }: TSuccessResponse) {
     this.message = !message ? reasonPhrases : message
-    this.status = status
+    this.statusCode = statusCode
     this.metadata = metadata
   }
 
   send(res: Response, headers = {}) {
-    return res.status(this.status).json(this)
+    return res.status(this.statusCode).json(this)
   }
 }
 
-class OK extends SuccessResponse {
+class OkResponse extends SuccessResponse {
   constructor({ message, metadata }: TSuccessResponse) {
     super({ message, metadata })
   }
 }
 
-class CREATED extends SuccessResponse {
+class CreatedResponse extends SuccessResponse {
   constructor({
     message,
-    status = StatusCodes.CREATED,
+    statusCode = StatusCodes.CREATED,
     reasonPhrases = ReasonPhrases.CREATED,
     metadata,
   }: TSuccessResponse) {
-    super({ message, status, reasonPhrases, metadata })
+    super({ message, statusCode, reasonPhrases, metadata })
   }
 }
 
-export { OK, CREATED }
+export { OkResponse, CreatedResponse }

@@ -23,12 +23,12 @@ if (config.environment !== "test") {
 }
 app.use(helmet())
 app.use(express.json())
-app.use(compression())
 app.use(
   express.urlencoded({
     extended: true,
   }),
 )
+app.use(compression())
 app.use(cors())
 app.options("*", cors())
 

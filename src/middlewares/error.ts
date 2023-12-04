@@ -28,8 +28,6 @@ export const errorHandler = (
 ) => {
   res.locals.errorMessage = err.message
 
-  console.log(err)
-
   const statusCode: number = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR
   const message: string = err.message || ReasonPhrases.INTERNAL_SERVER_ERROR
 

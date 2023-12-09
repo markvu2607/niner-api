@@ -14,6 +14,7 @@ import routes from "./routes"
 import { NotFoundError } from "./core/error.response"
 import config from "./configs/config"
 import { errorConverter, errorHandler } from "./middlewares/error"
+import checkConnections from "./helpers/checkConnections"
 
 const app: Express = express()
 
@@ -33,10 +34,10 @@ app.use(cors())
 app.options("*", cors())
 
 // DB
-// require("./dbs/init.mongodb")
+checkConnections()
 
 // Routes
-app.use("", routes)
+app.use("/api/", routes)
 
 // Handling not found
 app.use((req: Request, res: Response, next: NextFunction) => {

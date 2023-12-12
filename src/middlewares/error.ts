@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express"
 import { StatusCodes, ReasonPhrases } from "http-status-codes"
 
-import config from "../configs/config.js"
-import logger from "../configs/logger.js"
-import { ErrorResponse } from "../core/error.response.js"
+import config from "@/configs/config.js"
+import logger from "@/configs/logger.js"
+import { ErrorResponse } from "@/core/error.response.js"
 
 export const errorConverter = (
   err: any,

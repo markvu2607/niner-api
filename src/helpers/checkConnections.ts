@@ -1,4 +1,4 @@
-import prisma from "../dbs/prisma.js"
+import prisma from "@/dbs/prisma.js"
 
 const checkConnections = async () => {
   try {

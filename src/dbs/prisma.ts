@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
-import config from "../configs/config.js"
+
+import config from "@/configs/config.js"
 
 const prismaClientSingleton = () => {
   return new PrismaClient()

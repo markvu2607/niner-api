@@ -7,14 +7,14 @@ import express, {
   ErrorRequestHandler,
 } from "express"
 import helmet from "helmet"
-import morgan from "./configs/morgan.js"
 import cors from "cors"
 
-import routes from "./routes/index.js"
-import { NotFoundError } from "./core/error.response.js"
-import config from "./configs/config.js"
-import { errorConverter, errorHandler } from "./middlewares/error.js"
-import checkConnections from "./helpers/checkConnections.js"
+import morgan from "@/configs/morgan.js"
+import routes from "@/routes/v1/index.js"
+import { NotFoundError } from "@/core/error.response.js"
+import config from "@/configs/config.js"
+import { errorConverter, errorHandler } from "@/middlewares/error.js"
+import checkConnections from "@/helpers/checkConnections.js"
 
 const app: Express = express()
 
@@ -36,10 +36,8 @@ app.options("*", cors())
 // DB
 checkConnections()
 
-// Routes
-app.use("/api/", routes)
+app.use("/api/v1", routes)
 
-// Handling not found
 app.use((req: Request, res: Response, next: NextFunction) => {
   const error = new NotFoundError()
   next(error)

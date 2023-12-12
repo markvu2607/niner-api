@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express"
-import { OkResponse } from "../core/success.response"
+import { OkResponse } from "../core/success.response.js"
 
 const router = express.Router()
 

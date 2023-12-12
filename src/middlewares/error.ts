@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express"
 import { StatusCodes, ReasonPhrases } from "http-status-codes"
 
-import config from "../configs/config"
-import logger from "../configs/logger"
-import { ErrorResponse } from "../core/error.response"
+import config from "../configs/config.js"
+import logger from "../configs/logger.js"
+import { ErrorResponse } from "../core/error.response.js"
 
 export const errorConverter = (
   err: any,
@@ -34,10 +34,10 @@ export const errorHandler = (
   const response = {
     statusCode,
     message,
-    // ...(config.environment === "development" && { stack: err.stack }),
+    // ...(config.nodeEnv === "development" && { stack: err.stack }),
   }
 
-  if (config.environment === "development") {
+  if (config.nodeEnv === "development") {
     logger.error(err)
   }
 

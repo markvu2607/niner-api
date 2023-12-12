@@ -7,18 +7,18 @@ import express, {
   ErrorRequestHandler,
 } from "express"
 import helmet from "helmet"
-import morgan from "./configs/morgan"
+import morgan from "./configs/morgan.js"
 import cors from "cors"
 
-import routes from "./routes"
-import { NotFoundError } from "./core/error.response"
-import config from "./configs/config"
-import { errorConverter, errorHandler } from "./middlewares/error"
-import checkConnections from "./helpers/checkConnections"
+import routes from "./routes/index.js"
+import { NotFoundError } from "./core/error.response.js"
+import config from "./configs/config.js"
+import { errorConverter, errorHandler } from "./middlewares/error.js"
+import checkConnections from "./helpers/checkConnections.js"
 
 const app: Express = express()
 
-if (config.environment !== "test") {
+if (config.nodeEnv !== "test") {
   app.use(morgan.successHandler)
   app.use(morgan.errorHandler)
 }

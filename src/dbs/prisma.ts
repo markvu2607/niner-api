@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client"
-import config from "../configs/config"
+import config from "../configs/config.js"
 
 const prismaClientSingleton = () => {
   return new PrismaClient()
@@ -13,4 +13,4 @@ const prisma = globalThis.prisma ?? prismaClientSingleton()
 
 export default prisma
 
-if (config.environment !== "production") globalThis.prisma = prisma
+if (config.nodeEnv !== "production") globalThis.prisma = prisma

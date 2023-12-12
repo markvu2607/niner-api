@@ -1,25 +1,28 @@
 import { z } from "zod"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const envVarsSchema = z.object({
-  ENVIRONMENT: z
+  NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
   PORT: z.number().default(8000),
 })
 
 const validatedEnvVars = envVarsSchema.safeParse({
-  ENVIRONMENT: Bun.env.ENVIRONMENT,
-  PORT: Number(Bun.env.PORT),
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: Number(process.env.PORT),
 })
 
-if (!validatedEnvVars.success) {
+if (validatedEnvVars.success === false) {
   throw new Error(
     `Config validation error: ${validatedEnvVars.error.flatten().fieldErrors}`,
   )
 }
 
 const config = {
-  environment: validatedEnvVars.data.ENVIRONMENT,
+  nodeEnv: validatedEnvVars.data.NODE_ENV,
   port: validatedEnvVars.data.PORT,
 }
 

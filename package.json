@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "lint": "eslint --ext .ts,.js src/",
     "format": "prettier --write --ignore-path=.gitignore .",
     "format:check": "prettier --check --ignore-path=.gitignore .",
@@ -33,6 +33,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
     "prettier": "^3.1.0",
+    "tsc-alias": "^1.8.8",
     "tsx": "^4.6.2",
     "typescript": "^5.3.3"
   },

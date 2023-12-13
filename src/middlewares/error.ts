@@ -34,7 +34,7 @@ export const errorHandler = (
   const response = {
     statusCode,
     message,
-    // ...(config.nodeEnv === "development" && { stack: err.stack }),
+    ...(config.nodeEnv === "development" && { stack: err.stack }),
   }
 
   if (config.nodeEnv === "development") {
